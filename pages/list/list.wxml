@@ -1,0 +1,34 @@
+<!--pages/list/list.wxml-->
+<!-- <text>pages/list/list.wxml</text> -->
+<view class="container">
+    <view class="widget">
+        <text class="column">ID</text>
+        <text class="column">区域名</text>
+        <text class="column">优先级</text>
+        <text class="link-column">操作</text>
+    </view>
+    <!-- 滚动视图 scroll-y纵向滚动 -->
+    <scroll-view scroll-y="true">
+        <view>
+            <!--  -->
+            <block wx:for="{{list}}">
+                <view class="widget">
+                    <view>
+                        <text class="column">{{item.areaId}}</text>
+                        <text class="column">{{item.areaName}}</text>
+                        <text class="column">{{item.priority}}</text>
+                        <view class="link-column">
+                            <navigator class="link" url="../operation/operation?areaId={{item.areaId}}">编辑</navigator>|
+                            <!-- 
+                                data-*组件上触发的事件时，会发送给事件处理函数
+                                bindtap当用户点击该组件的时候会在该页面对应的Page中找到相应的事件处理函数
+                            -->
+                            <text class="link" bindtap="deleteArea"  data-areaId="{{item.areaId}}" data-areaName="{{item.areaName}}" data-index="{{index}}">删除</text>
+                        </view>
+                     </view>
+               </view>
+            </block>
+        </view>
+    </scroll-view>
+    <button type="primary" bindtap="addArea">添加区域信息</button>
+</view>
